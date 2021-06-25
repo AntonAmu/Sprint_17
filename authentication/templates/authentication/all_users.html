@@ -4,7 +4,7 @@
 	{%if list_of_users%}
 		{%for user in list_of_users%}
 			<ul>
-				<div class ='form-group col-md-2'>
+				<div class ='form-group col-md-6'>
 					<li>{{user.id}} {{user.first_name}} {{user.last_name}}
 						<a href = {% url "authentication:delete_user" user.pk%} class = 'btn btn-primary'>Delete</a>
 						<a href = {% url "authentication:update_user" user.pk%} class = 'btn btn-primary'>Update</a>

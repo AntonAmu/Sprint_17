@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class UserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'middle_name', 'password', 'role', 'is_active']
         widgets = {
             'first_name': forms.TextInput(attrs = {'class': 'form-control'}),
             'last_name': forms.TextInput(attrs = {'class': 'form-control'}),
@@ -22,16 +22,8 @@ class UserForm(forms.ModelForm):
             raise ValidationError("User with such email has been already created")
         return self.cleaned_data
 
-class UpdateUserForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['first_name', 'last_name', 'email']
-        widgets = {
-            'first_name': forms.TextInput(attrs = {'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs = {'class': 'form-control'}),
-            'email': forms.EmailInput(attrs = {'class': 'form-control'})
-        }
-
+class UpdateUserForm(UserForm):
+    
     def clean(self):
         first_name =  self.cleaned_data['first_name']
         last_name = self.cleaned_data['last_name']

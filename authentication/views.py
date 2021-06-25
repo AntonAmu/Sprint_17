@@ -28,14 +28,13 @@ class CreateUser(View):
 class UpdateUser(View):
     def get(self, request, id):
         user = CustomUser.get_by_id(id)
-        form = UpdateUserForm(user.to_dict())
+        form = UpdateUserForm(instance=user)
         return render(request, 'authentication\\update_user_form.html', {'form': form, "user": user})
     def post(self, request, id):
-        bound_form = UpdateUserForm(request.POST)
         user = CustomUser.get_by_id(id)
+        bound_form = UpdateUserForm(request.POST, instance=user)
         if bound_form.is_valid():   
-            update_user = bound_form.save(commit=False)
-            update_user.objects.save()
+            bound_form.save()
             return redirect('authentication:all_users')
         print('-'*90)
         return render(request, 'authentication\\update_user_form.html', {'form': bound_form})
