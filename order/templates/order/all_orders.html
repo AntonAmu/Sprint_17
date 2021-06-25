@@ -1,0 +1,20 @@
+{%extends 'order\\base.html'%}
+{%block main%}
+<h3>		
+	{%if list_of_orders%}
+		{%for order in list_of_orders%}
+			<ul>
+				<div class ='form-group col-md-6'>
+					<li>{{order}}
+						<a href = {% url "order:delete_order" order.pk%} class = 'btn btn-primary'>Delete</a>
+						<a href = {% url "order:update_order" order.pk%} class = 'btn btn-primary'>Update</a>
+					</li>
+				</div>
+			</ul>
+		{%endfor%}
+	{%else%}There is nothing 
+	{%endif%}
+</h3>
+<h5><a href = {% url "order:create_order" %}>Create order</a></h5>
+
+{%endblock%}
