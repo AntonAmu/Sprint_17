@@ -16,14 +16,12 @@ class CreateOrder(View):
     
     def get(self, request):
         form = OrderForm()
-        request.session['user'] = 1
-        print(request.session.items())
         return render(request, 'order\\create_order_form.html', {'form': form})
     
     def post(self, request):
         bound_form = OrderForm(request.POST)
         if bound_form.is_valid():
-            new_user = bound_form.save()
+            new_order = bound_form.save()
             return redirect('order:all_orders')
         return render(request, 'order\\create_order_form.html', {'form': bound_form})
 

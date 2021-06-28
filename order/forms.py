@@ -1,10 +1,10 @@
 from django import forms
-from .models import Order
+from .models import Order, Book, CustomUser
 from authentication.models import CustomUser 
 from django.core.exceptions import ValidationError
 from django.forms.widgets import NumberInput
 
-class DateInput(forms.DateInput):
+class DateInput(forms.DateTimeInput):
     input_type = 'date'
 
 class OrderForm(forms.ModelForm):
